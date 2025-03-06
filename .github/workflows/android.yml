@@ -30,7 +30,7 @@ jobs:
     - name: Build with Gradle
       run: |
         export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/21.4.7075529
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --stacktrace
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
