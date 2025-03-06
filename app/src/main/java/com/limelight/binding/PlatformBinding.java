@@ -11,7 +11,6 @@ import com.limelight.nvstream.http.LimelightCryptoProvider;
 
 import java.security.Security;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 
 public class PlatformBinding {
@@ -36,7 +35,7 @@ public class PlatformBinding {
             return;
         }
         
-        // Mark as attempted so we don't try multiple times
+        // Mark as attempted
         enabledTls12 = true;
         
         // Only needed for Android 4.4 and below
@@ -45,36 +44,17 @@ public class PlatformBinding {
         }
         
         try {
-            LimeLog.info("Enabling TLS 1.2 for Android " + Build.VERSION.RELEASE);
+            // Basic TLS 1.2 enablement through system properties
+            System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
             
+            // Initialize SSLContext
             try {
-                // Enable TLS 1.2 by setting system properties
-                System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+                SSLContext.getInstance("TLS");
             } catch (Exception e) {
-                LimeLog.warning("Error setting https.protocols: " + e.getMessage());
+                // Just log this
             }
-            
-            try {
-                // Set security provider properties if possible
-                Security.setProperty("crypto.policy", "unlimited");
-            } catch (Exception e) {
-                LimeLog.warning("Error setting crypto policy: " + e.getMessage());
-            }
-            
-            try {
-                // Initialize SSLContext for TLS 1.2 in a way that won't cause
-                // initialization errors
-                SSLContext sslContext = SSLContext.getInstance("TLS");
-                sslContext.init(null, null, null);
-                
-                HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-            } catch (Exception e) {
-                LimeLog.warning("Error initializing SSLContext: " + e.getMessage());
-            }
-            
-            LimeLog.info("TLS 1.2 initialization completed");
         } catch (Exception e) {
-            LimeLog.warning("Unexpected error enabling TLS 1.2: " + e.getMessage());
+            // Ignore any errors
         }
     }
 }

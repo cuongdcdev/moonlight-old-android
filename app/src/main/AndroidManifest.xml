@@ -31,7 +31,6 @@
         android:required="false"/>
 
     <application
-        android:name=".LimelightApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:networkSecurityConfig="@xml/network_security_config"

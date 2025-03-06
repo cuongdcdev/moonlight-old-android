@@ -73,7 +73,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Locale;
-
+import com.limelight.binding.PlatformBinding;
 
 public class Game extends Activity implements SurfaceHolder.Callback,
     OnGenericMotionListener, OnTouchListener, NvConnectionListener, EvdevListener,
@@ -146,6 +146,9 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        PlatformBinding.enableTls12ForOldAndroid();
+
 
         UiHelper.setLocale(this);
 

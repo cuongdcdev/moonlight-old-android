@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
+import com.limelight.binding.PlatformBinding;
 import com.limelight.utils.SpinnerDialog;
 
 public class HelpActivity extends Activity {
@@ -16,6 +16,7 @@ public class HelpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PlatformBinding.enableTls12ForOldAndroid();
 
         webView = new WebView(this);
         setContentView(webView);

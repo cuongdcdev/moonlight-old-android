@@ -43,7 +43,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-
+import com.limelight.binding.PlatformBinding;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class AppView extends Activity implements AdapterFragmentCallbacks {
@@ -247,6 +247,7 @@ public class AppView extends Activity implements AdapterFragmentCallbacks {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        PlatformBinding.enableTls12ForOldAndroid();
         // Assume we're in the foreground when created to avoid a race
         // between binding to CMS and onResume()
         inForeground = true;
