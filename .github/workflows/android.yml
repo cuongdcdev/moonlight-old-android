@@ -27,5 +27,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-        name: moonlight-android-4.1.apk
-        path: app/build/outputs/apk/debug/moonlight-android-4.1.apk
+        name: app-debug.apk
+        path: app/build/outputs/apk/debug/app-debug.apk
